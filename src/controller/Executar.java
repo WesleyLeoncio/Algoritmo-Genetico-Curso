@@ -25,7 +25,5 @@ public class Executar {
         listaProdutos.forEach((produto -> System.out.println(produto.toString())));
 
 
-
-
     }
 }
