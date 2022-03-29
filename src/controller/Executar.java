@@ -23,7 +23,7 @@ public class Executar {
         listaProdutos.add(new Produto("Notebook Lenovo", 0.498, 1999.90));
         listaProdutos.add(new Produto("Notebook Asus", 0.527, 3999.00));
 
-        //TODO NÃO SEI PORQUE ESSE PORQUE O MOLUCO FEZ ISSO.
+        //TODO NÃO SEI PORQUE ESSE MOLUCO FEZ ISSO.
         List<Double> espacos = new ArrayList<>();
         List<Double> valores = new ArrayList<>();
         List<String> nomes = new ArrayList<>();
