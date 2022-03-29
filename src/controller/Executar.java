@@ -23,7 +23,7 @@ public class Executar {
         listaProdutos.add(new Produto("Notebook Lenovo", 0.498, 1999.90));
         listaProdutos.add(new Produto("Notebook Asus", 0.527, 3999.00));
 
-        //TODO NÃO SEI PORQUE ESSE MOLUCO FEZ ISSO.
+        //TODO: NÃO SEI PORQUE ESSE MOLUCO FEZ ISSO.
         List<Double> espacos = new ArrayList<>();
         List<Double> valores = new ArrayList<>();
         List<String> nomes = new ArrayList<>();
@@ -34,16 +34,14 @@ public class Executar {
             nomes.add(produto.getNome());
         }
         Double limite = 3.0;
+        //TODO: MELHORAR CODIGO PASSASNDO O PROODUTO INVEZ DE PASSAR OS 3 ARRAYS
         Individuo individuo1 = new Individuo(espacos, valores, limite);
-        System.out.println("Espaços: " + individuo1.getEspacos());
-        System.out.println("Valores: " + individuo1.getValores());
-        System.out.println("Cromossomos: " + individuo1.getCromossomo());
-        for (int i = 0; i < listaProdutos.size(); i++) {
-            if (individuo1.getCromossomo().get(i).equals("1")) {
-                System.out.println("Nome: " + listaProdutos.get(i).getNome() + " R$: "
-                        + listaProdutos.get(i).getValor());
-            }
-        }
+        individuo1.avaliacao();
+        System.out.println("///////////////////////////////////////////////////");
+        System.out.println("Notas: " + individuo1.getNotaAvaliacao());
+        System.out.println("Espaço usado: " + individuo1.getEspacoUsado());
+        System.out.println("///////////////////////////////////////////////////");
+
 
     }
 }

@@ -9,6 +9,7 @@ public class Individuo {
     private List<String> cromossomo = new ArrayList<>();
     private Double limiteEspaco;
     private Double notaAvaliacao;
+    private Double espacoUsado;
     private int geracao;
 
     public Individuo(List<Double> espacos, List<Double> valores, Double limiteEspaco) {
@@ -16,6 +17,7 @@ public class Individuo {
         this.valores = valores;
         this.limiteEspaco = limiteEspaco;
         this.notaAvaliacao = 0.0;
+        this.espacoUsado = 0.0;
         this.geracao = 0;
 
         for(int i = 0;i < this.espacos.size();i++){
@@ -25,6 +27,30 @@ public class Individuo {
                 this.cromossomo.add("1");
             }
         }
+
+    }
+    public void avaliacao(){
+        Double nota = 0.0;
+        Double somaEspacos = 0.0;
+        for(int i = 0; i < this.cromossomo.size();i++){
+            if(this.cromossomo.get(i).equals("1")){
+                nota += this.valores.get(i);
+                somaEspacos += this.espacos.get(i);
+            }
+        }
+        if(somaEspacos > this.limiteEspaco){
+            nota = 1.0;
+        }
+        this.notaAvaliacao = nota;
+        this.espacoUsado = somaEspacos;
+    }
+
+    public Double getEspacoUsado() {
+        return espacoUsado;
+    }
+
+    public void setEspacoUsado(Double espacoUsado) {
+        this.espacoUsado = espacoUsado;
     }
 
     public List<Double> getEspacos() {
