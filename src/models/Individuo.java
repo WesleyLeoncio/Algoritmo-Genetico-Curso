@@ -38,6 +38,7 @@ public class Individuo {
                 somaEspacos += this.espacos.get(i);
             }
         }
+        // Se passar do limte maximo atribua uma nota 1
         if(somaEspacos > this.limiteEspaco){
             nota = 1.0;
         }
@@ -45,6 +46,46 @@ public class Individuo {
         this.espacoUsado = somaEspacos;
     }
 
+    public List<Individuo> crossover(Individuo outroIndividuo){
+        //Gera a nota de corte aleatoriamente
+        int corte = (int) Math.round(Math.random() * this.cromossomo.size());
+        List<String> filho1 = new ArrayList<>();
+        filho1.addAll(outroIndividuo.getCromossomo().subList(0,corte));
+        filho1.addAll(this.cromossomo.subList(corte, this.cromossomo.size()));
+
+        List<String> filho2 = new ArrayList<>();
+        filho2.addAll(cromossomo.subList(0,corte));
+        filho2.addAll(outroIndividuo.getCromossomo().subList(corte, this.cromossomo.size()));
+
+        List<Individuo> filhos = new ArrayList<>();
+        filhos.add(new Individuo(this.espacos, this.valores, this.limiteEspaco));
+        filhos.add(new Individuo(this.espacos, this.valores, this.limiteEspaco));
+
+        filhos.get(0).setCromossomo(filho1);
+        filhos.get(0).setGeracao(this.getGeracao()+1);
+
+        filhos.get(1).setCromossomo(filho2);
+        filhos.get(1).setGeracao(this.getGeracao()+1);
+
+        return filhos;
+    }
+
+    public Individuo mutacao(Double taxaMutacao){
+        System.out.println("Antes da mutação: "+this.cromossomo);
+        for (int i = 0; i < this.cromossomo.size(); i++){
+            if(Math.random() < taxaMutacao){
+                if(this.cromossomo.get(0).equals("1")){
+                    this.cromossomo.set(i, "0");
+                }else{
+                    this.cromossomo.set(i, "1");
+                }
+            }
+        }
+        System.out.println("Depois da mutação: "+this.cromossomo);
+        return this;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
     public Double getEspacoUsado() {
         return espacoUsado;
     }
