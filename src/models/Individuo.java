@@ -3,9 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Individuo {
-    private List<Double> espacos = new ArrayList<>();
-    private List<Double> valores = new ArrayList<>();
+public class Individuo implements Comparable<Individuo>{
+    private List<Double> espacos;
+    private List<Double> valores;
     private List<String> cromossomo = new ArrayList<>();
     private Double limiteEspaco;
     private Double notaAvaliacao;
@@ -29,6 +29,7 @@ public class Individuo {
         }
 
     }
+
     public void avaliacao(){
         Double nota = 0.0;
         Double somaEspacos = 0.0;
@@ -84,6 +85,7 @@ public class Individuo {
         System.out.println("Depois da mutação: "+this.cromossomo);
         return this;
     }
+
 
     //////////////////////////////////////////////////////////////////////////////////
     public Double getEspacoUsado() {
@@ -141,4 +143,10 @@ public class Individuo {
     public void setGeracao(int geracao) {
         this.geracao = geracao;
     }
+
+    @Override
+    public int compareTo(Individuo o) {
+        return o.getNotaAvaliacao().compareTo(this.notaAvaliacao);
+    }
+
 }

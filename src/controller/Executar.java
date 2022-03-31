@@ -1,5 +1,6 @@
 package controller;
 
+import models.AlgoritmoGenetico;
 import models.Individuo;
 import models.Produto;
 
@@ -27,7 +28,7 @@ public class Executar {
         List<Double> espacos = new ArrayList<>();
         List<Double> valores = new ArrayList<>();
         List<String> nomes = new ArrayList<>();
-        final String separador = "///////////////////////////////////////////////////";
+        final String separador = "///////////////////////////////////////////////////////////////////////////////////////////////////////////////////";
 
         for (Produto produto : listaProdutos) {
             espacos.add(produto.getEspaco());
@@ -35,26 +36,24 @@ public class Executar {
             nomes.add(produto.getNome());
         }
 
-        Double limite = 3.0;
+
         //TODO: MELHORAR CODIGO PASSASNDO O PROODUTO INVEZ DE PASSAR OS 2 ARRAYS
-        Individuo individuo1 = new Individuo(espacos, valores, limite);
-        individuo1.avaliacao();
-        System.out.println(separador);
-        System.out.println("Cromossomo: " + individuo1.getCromossomo());
-        System.out.println("Notas: " + individuo1.getNotaAvaliacao());
-        System.out.println("Espaço usado: " + individuo1.getEspacoUsado());
-        System.out.println(separador);
+        Double limite = 3.0;
+        int tamanhoPopulacao = 20;
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
+        ag.inicializarPopulacao(espacos,valores,limite);
+        ag.getPopulacao().forEach((Individuo::avaliacao));
+        ag.ordenaPopulacao();
+        for (int i = 0; i < ag.getTamanhoPopulacao(); i++) {
+            System.out.println(separador+"\n"+"*** Indivíduo " + i + " ****\nEspaços = " +
+                    ag.getPopulacao().get(i).getEspacos() +
+                    "\nValores = " + ag.getPopulacao().get(i).getValores() +
+                    "\nCromossomo = " + ag.getPopulacao().get(i).getCromossomo()+
+                    "\nNota: "+ag.getPopulacao().get(i).getNotaAvaliacao()+
+                    "\nEspaço: "+ag.getPopulacao().get(i).getEspacoUsado()+
+                    "\n"+separador+"\n");
+        }
 
-        Individuo individuo2 = new Individuo(espacos, valores, limite);
-        individuo2.avaliacao();
-        System.out.println(separador);
-        System.out.println("Cromossomo: " + individuo2.getCromossomo());
-        System.out.println("Notas: " + individuo2.getNotaAvaliacao());
-        System.out.println("Espaço usado: " + individuo2.getEspacoUsado());
-        System.out.println(separador);
 
-        individuo1.crossover(individuo2);
-        individuo1.mutacao(0.05);
-        individuo2.mutacao(0.05);
     }
 }
