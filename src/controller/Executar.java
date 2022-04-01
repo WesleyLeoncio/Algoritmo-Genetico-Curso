@@ -41,19 +41,14 @@ public class Executar {
         Double limite = 3.0;
         int tamanhoPopulacao = 20;
         AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
-        ag.inicializarPopulacao(espacos,valores,limite);
+        ag.inicializarPopulacao(espacos, valores, limite);
         ag.getPopulacao().forEach((Individuo::avaliacao));
         ag.ordenaPopulacao();
-        for (int i = 0; i < ag.getTamanhoPopulacao(); i++) {
-            System.out.println(separador+"\n"+"*** Indivíduo " + i + " ****\nEspaços = " +
-                    ag.getPopulacao().get(i).getEspacos() +
-                    "\nValores = " + ag.getPopulacao().get(i).getValores() +
-                    "\nCromossomo = " + ag.getPopulacao().get(i).getCromossomo()+
-                    "\nNota: "+ag.getPopulacao().get(i).getNotaAvaliacao()+
-                    "\nEspaço: "+ag.getPopulacao().get(i).getEspacoUsado()+
-                    "\n"+separador+"\n");
-        }
-
-
+        ag.melhorIndividuo(ag.getPopulacao().get(0));
+        System.out.println(separador + "\nCromossomo = " +
+                ag.getMelhorSolucao().getCromossomo() +
+                "\nNota = " + ag.getMelhorSolucao().getNotaAvaliacao() +
+                "\n" + separador + "\n");
+        System.out.println("Soma das avaliações: "+ag.somaAvaliacoes());
     }
 }

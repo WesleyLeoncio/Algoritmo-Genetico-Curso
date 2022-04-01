@@ -24,6 +24,20 @@ public class AlgoritmoGenetico {
     public void ordenaPopulacao(){
         Collections.sort(this.populacao);
     }
+
+    public void melhorIndividuo(Individuo individuo){
+        if(individuo.getNotaAvaliacao() > this.melhorSolucao.getNotaAvaliacao()){
+            this.melhorSolucao = individuo;
+        }
+    }
+
+    public Double somaAvaliacoes(){
+        Double soma = 0.0;
+        for(Individuo individuo: this.populacao){
+            soma+= individuo.getNotaAvaliacao();
+        }
+        return soma;
+    }
     /////////////////////////////////////////////////////////////////////////////////////
     public int getTamanhoPopulacao() {
         return tamanhoPopulacao;
