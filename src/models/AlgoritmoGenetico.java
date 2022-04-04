@@ -5,9 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class AlgoritmoGenetico {
-    private int tamanhoPopulacao;
+    private final int tamanhoPopulacao;
     private List<Individuo> populacao = new ArrayList<>();
-    private int geracao;
     private Individuo melhorSolucao;
 
     public AlgoritmoGenetico(int tamanhoPopulacao) {
@@ -32,7 +31,7 @@ public class AlgoritmoGenetico {
     }
 
     public Double somaAvaliacoes() {
-        Double soma = 0.0;
+        double soma = 0.0;
         for (Individuo individuo : this.populacao) {
             soma += individuo.getNotaAvaliacao();
         }
@@ -41,8 +40,8 @@ public class AlgoritmoGenetico {
 
     public int selecionaPai(Double somaAvaliacao) {
         int pai = -1;
-        Double valorSorteado = Math.random() * somaAvaliacao;
-        Double soma = 0.0;
+        double valorSorteado = Math.random() * somaAvaliacao;
+        double soma = 0.0;
         int i = 0;
         while (i < this.populacao.size() && soma < valorSorteado) {
             soma += this.populacao.get(i).getNotaAvaliacao();
@@ -60,8 +59,8 @@ public class AlgoritmoGenetico {
                 " Cromossomo: " + melhor.getCromossomo());
     }
 
-    public List resolver(Double taxaMutacao, int numeroGeracoes, List espacos,
-                         List valores, Double limiteEspacos) {
+    public Individuo resolver(Double taxaMutacao, int numeroGeracoes, List<Double> espacos,
+                                 List<Double> valores, Double limiteEspacos) {
 
         this.inicializarPopulacao(espacos, valores, limiteEspacos);
         for (Individuo individuo : this.populacao) {
@@ -93,21 +92,11 @@ public class AlgoritmoGenetico {
             this.melhorIndividuo(melhor);
 
         }
-        System.out.println("Melhor solução G -> " + this.melhorSolucao.getGeracao() +
-                " Valor: " + this.melhorSolucao.getNotaAvaliacao() +
-                " Espaço: " + this.melhorSolucao.getEspacoUsado() +
-                " Cromossomo: " + this.melhorSolucao.getCromossomo());
-        return this.melhorSolucao.getCromossomo();
+
+        return this.melhorSolucao;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
-    public int getTamanhoPopulacao() {
-        return tamanhoPopulacao;
-    }
-
-    public void setTamanhoPopulacao(int tamanhoPopulacao) {
-        this.tamanhoPopulacao = tamanhoPopulacao;
-    }
 
     public List<Individuo> getPopulacao() {
         return populacao;
@@ -117,19 +106,5 @@ public class AlgoritmoGenetico {
         this.populacao = populacao;
     }
 
-    public int getGeracao() {
-        return geracao;
-    }
 
-    public void setGeracao(int geracao) {
-        this.geracao = geracao;
-    }
-
-    public Individuo getMelhorSolucao() {
-        return melhorSolucao;
-    }
-
-    public void setMelhorSolucao(Individuo melhorSolucao) {
-        this.melhorSolucao = melhorSolucao;
-    }
 }

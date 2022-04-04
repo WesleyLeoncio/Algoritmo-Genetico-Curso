@@ -2,6 +2,7 @@ package controller;
 
 import models.AlgoritmoGenetico;
 
+import models.Individuo;
 import models.Produto;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class Executar {
     public static void main(String[] args) {
+
         List<Produto> listaProdutos = new ArrayList<>();
         listaProdutos.add(new Produto("Iphone 6", 0.000089, 2911.12));
         listaProdutos.add(new Produto("TV 55' ", 0.400, 4346.99));
@@ -24,29 +26,24 @@ public class Executar {
         listaProdutos.add(new Produto("Notebook Lenovo", 0.498, 1999.90));
         listaProdutos.add(new Produto("Notebook Asus", 0.527, 3999.00));
 
-        //TODO: NÃO SEI PORQUE ESSE MOLUCO FEZ ISSO.
         List<Double> espacos = new ArrayList<>();
         List<Double> valores = new ArrayList<>();
-        List<String> nomes = new ArrayList<>();
 
         for (Produto produto : listaProdutos) {
             espacos.add(produto.getEspaco());
             valores.add(produto.getValor());
         }
 
-
-        //TODO: MELHORAR CODIGO PASSASNDO O PROODUTO INVEZ DE PASSAR OS 2 ARRAYS
-        Double limite = 3.0;
+        double limite = 3.0;
         int tamanhoPopulacao = 20;
-        Double taxaMutacao = 0.01;
+        double taxaMutacao = 0.01;
         int numeroGeracoes = 100;
         AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
-        List resultado = ag.resolver(taxaMutacao, numeroGeracoes, espacos, valores, limite);
-        for (int i = 0; i < listaProdutos.size(); i++) {
-            if (resultado.get(i).equals("1")) {
-                System.out.println("Nome: " + listaProdutos.get(i).getNome());
-            }
-        }
+        Individuo resultado = ag.resolver(taxaMutacao, numeroGeracoes, espacos, valores, limite);
+        System.out.println("Melhor solução G -> " + resultado.getGeracao() +
+                " Valor: " + resultado.getNotaAvaliacao() +
+                " Espaço: " + resultado.getEspacoUsado() +
+                " Cromossomo: " + resultado.getCromossomo());
 
     }
 }

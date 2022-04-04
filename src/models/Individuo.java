@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Individuo implements Comparable<Individuo>{
-    private List<Double> espacos;
-    private List<Double> valores;
+    private final List<Double> espacos;
+    private final List<Double> valores;
     private List<String> cromossomo = new ArrayList<>();
-    private Double limiteEspaco;
+    private final Double limiteEspaco;
     private Double notaAvaliacao;
     private Double espacoUsado;
     private int geracao;
@@ -31,8 +31,8 @@ public class Individuo implements Comparable<Individuo>{
     }
 
     public void avaliacao(){
-        Double nota = 0.0;
-        Double somaEspacos = 0.0;
+        double nota = 0.0;
+        double somaEspacos = 0.0;
         for(int i = 0; i < this.cromossomo.size();i++){
             if(this.cromossomo.get(i).equals("1")){
                 nota += this.valores.get(i);
@@ -90,26 +90,6 @@ public class Individuo implements Comparable<Individuo>{
         return espacoUsado;
     }
 
-    public void setEspacoUsado(Double espacoUsado) {
-        this.espacoUsado = espacoUsado;
-    }
-
-    public List<Double> getEspacos() {
-        return espacos;
-    }
-
-    public void setEspacos(List<Double> espacos) {
-        this.espacos = espacos;
-    }
-
-    public List<Double> getValores() {
-        return valores;
-    }
-
-    public void setValores(List<Double> valores) {
-        this.valores = valores;
-    }
-
     public List<String> getCromossomo() {
         return cromossomo;
     }
@@ -118,20 +98,8 @@ public class Individuo implements Comparable<Individuo>{
         this.cromossomo = cromossomo;
     }
 
-    public Double getLimiteEspaco() {
-        return limiteEspaco;
-    }
-
-    public void setLimiteEspaco(Double limiteEspaco) {
-        this.limiteEspaco = limiteEspaco;
-    }
-
     public Double getNotaAvaliacao() {
         return notaAvaliacao;
-    }
-
-    public void setNotaAvaliacao(Double notaAvaliacao) {
-        this.notaAvaliacao = notaAvaliacao;
     }
 
     public int getGeracao() {
