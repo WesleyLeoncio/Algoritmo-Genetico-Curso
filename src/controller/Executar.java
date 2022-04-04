@@ -1,7 +1,7 @@
 package controller;
 
 import models.AlgoritmoGenetico;
-import models.Individuo;
+
 import models.Produto;
 
 import java.util.ArrayList;
@@ -28,27 +28,25 @@ public class Executar {
         List<Double> espacos = new ArrayList<>();
         List<Double> valores = new ArrayList<>();
         List<String> nomes = new ArrayList<>();
-        final String separador = "///////////////////////////////////////////////////////////////////////////////////////////////////////////////////";
 
         for (Produto produto : listaProdutos) {
             espacos.add(produto.getEspaco());
             valores.add(produto.getValor());
-            nomes.add(produto.getNome());
         }
 
 
         //TODO: MELHORAR CODIGO PASSASNDO O PROODUTO INVEZ DE PASSAR OS 2 ARRAYS
         Double limite = 3.0;
         int tamanhoPopulacao = 20;
+        Double taxaMutacao = 0.01;
+        int numeroGeracoes = 100;
         AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
-        ag.inicializarPopulacao(espacos, valores, limite);
-        ag.getPopulacao().forEach((Individuo::avaliacao));
-        ag.ordenaPopulacao();
-        ag.melhorIndividuo(ag.getPopulacao().get(0));
-        System.out.println(separador + "\nCromossomo = " +
-                ag.getMelhorSolucao().getCromossomo() +
-                "\nNota = " + ag.getMelhorSolucao().getNotaAvaliacao() +
-                "\n" + separador + "\n");
-        System.out.println("Soma das avaliações: "+ag.somaAvaliacoes());
+        List resultado = ag.resolver(taxaMutacao, numeroGeracoes, espacos, valores, limite);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            if (resultado.get(i).equals("1")) {
+                System.out.println("Nome: " + listaProdutos.get(i).getNome());
+            }
+        }
+
     }
 }

@@ -72,7 +72,6 @@ public class Individuo implements Comparable<Individuo>{
     }
 
     public Individuo mutacao(Double taxaMutacao){
-        System.out.println("Antes da mutação: "+this.cromossomo);
         for (int i = 0; i < this.cromossomo.size(); i++){
             if(Math.random() < taxaMutacao){
                 if(this.cromossomo.get(0).equals("1")){
@@ -82,7 +81,6 @@ public class Individuo implements Comparable<Individuo>{
                 }
             }
         }
-        System.out.println("Depois da mutação: "+this.cromossomo);
         return this;
     }
 
