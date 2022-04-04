@@ -4,23 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Individuo implements Comparable<Individuo>{
-    private final List<Double> espacos;
-    private final List<Double> valores;
+    private final List<Produto> produtos;
     private List<String> cromossomo = new ArrayList<>();
     private final Double limiteEspaco;
+
     private Double notaAvaliacao;
     private Double espacoUsado;
     private int geracao;
 
-    public Individuo(List<Double> espacos, List<Double> valores, Double limiteEspaco) {
-        this.espacos = espacos;
-        this.valores = valores;
+    public Individuo(List<Produto> produtos, Double limiteEspaco) {
+        this.produtos = produtos;
         this.limiteEspaco = limiteEspaco;
         this.notaAvaliacao = 0.0;
         this.espacoUsado = 0.0;
         this.geracao = 0;
 
-        for(int i = 0;i < this.espacos.size();i++){
+        for(int i = 0;i < this.produtos.size();i++){
             if(java.lang.Math.random() < 0.5){
                 this.cromossomo.add("0");
             }else{
@@ -35,8 +34,8 @@ public class Individuo implements Comparable<Individuo>{
         double somaEspacos = 0.0;
         for(int i = 0; i < this.cromossomo.size();i++){
             if(this.cromossomo.get(i).equals("1")){
-                nota += this.valores.get(i);
-                somaEspacos += this.espacos.get(i);
+                nota += this.produtos.get(i).getValor();
+                somaEspacos += this.produtos.get(i).getEspaco();
             }
         }
         // Se passar do limte maximo atribua uma nota 1
@@ -59,8 +58,8 @@ public class Individuo implements Comparable<Individuo>{
         filho2.addAll(outroIndividuo.getCromossomo().subList(corte, this.cromossomo.size()));
 
         List<Individuo> filhos = new ArrayList<>();
-        filhos.add(new Individuo(this.espacos, this.valores, this.limiteEspaco));
-        filhos.add(new Individuo(this.espacos, this.valores, this.limiteEspaco));
+        filhos.add(new Individuo(produtos, this.limiteEspaco));
+        filhos.add(new Individuo(produtos, this.limiteEspaco));
 
         filhos.get(0).setCromossomo(filho1);
         filhos.get(0).setGeracao(this.getGeracao()+1);
@@ -84,8 +83,11 @@ public class Individuo implements Comparable<Individuo>{
         return this;
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
     public Double getEspacoUsado() {
         return espacoUsado;
     }

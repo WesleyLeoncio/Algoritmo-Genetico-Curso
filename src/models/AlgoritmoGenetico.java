@@ -13,9 +13,9 @@ public class AlgoritmoGenetico {
         this.tamanhoPopulacao = tamanhoPopulacao;
     }
 
-    public void inicializarPopulacao(List<Double> espacos, List<Double> valores, Double limiteEspaco) {
+    public void inicializarPopulacao(List<Produto> produtos, Double limiteEspaco) {
         for (int i = 0; i < this.tamanhoPopulacao; i++) {
-            this.populacao.add(new Individuo(espacos, valores, limiteEspaco));
+            this.populacao.add(new Individuo(produtos, limiteEspaco));
         }
         this.melhorSolucao = this.populacao.get(0);
     }
@@ -59,10 +59,9 @@ public class AlgoritmoGenetico {
                 " Cromossomo: " + melhor.getCromossomo());
     }
 
-    public Individuo resolver(Double taxaMutacao, int numeroGeracoes, List<Double> espacos,
-                                 List<Double> valores, Double limiteEspacos) {
+    public Individuo resolver(Double taxaMutacao, int numeroGeracoes, List<Produto> produtos,Double limiteEspacos) {
 
-        this.inicializarPopulacao(espacos, valores, limiteEspacos);
+        this.inicializarPopulacao(produtos, limiteEspacos);
         for (Individuo individuo : this.populacao) {
             individuo.avaliacao();
         }
