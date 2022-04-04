@@ -32,7 +32,7 @@ public class Executar {
         int numeroGeracoes = 100;
 
         AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
-        Individuo resultado = ag.resolver(taxaMutacao, numeroGeracoes,listaProdutos, limite);
+        Individuo resultado = ag.resolver(taxaMutacao, numeroGeracoes, listaProdutos, limite);
         System.out.println("\nMelhor solução G -> " + resultado.getGeracao() +
                 " Valor: " + resultado.getNotaAvaliacao() +
                 " Espaço: " + resultado.getEspacoUsado() +
